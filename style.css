@@ -1,4 +1,3 @@
-/* === Base Layout === */
 body {
   margin: 0;
   padding: 0;
@@ -12,29 +11,14 @@ body {
   overflow-x: hidden;
 }
 
-/* === Side Panels === */
-.side-panel {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 60px;
-  z-index: 0;
-}
+.side-panel { position: fixed; top: 0; bottom: 0; width: 60px; z-index: 0; }
 .left-panel { left: 0; background: maroon; }
 .right-panel { right: 0; background: navy; }
 
-/* === Ribbons === */
-.ribbon {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 10px;
-  z-index: 1;
-}
+.ribbon { position: fixed; top: 0; bottom: 0; width: 10px; z-index: 1; }
 .left-ribbon { left: 65px; background: maroon; }
 .right-ribbon { right: 65px; background: navy; }
 
-/* === Calendar Container === */
 .calendar-container {
   margin-top: 30px;
   background: #fff;
@@ -42,11 +26,9 @@ body {
   padding: 20px;
   width: 90%;
   max-width: 1000px;
-  z-index: 2;
   position: relative;
 }
 
-/* === Header === */
 .calendar-header {
   display: flex;
   justify-content: center;
@@ -65,53 +47,38 @@ body {
 .calendar-header button:hover { background: darkred; }
 .calendar-header h2 { margin: 0; font-size: 20px; color: #333; }
 
-/* === Calendar Grid === */
-.calendar-grid {
+#calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
 }
 
-/* Weekday headers */
-.calendar-grid .day-name {
+/* Day name headers */
+.day-name {
   font-weight: bold;
   text-align: center;
   background: #e6e6e6;
-  padding: 8px 0;
   border: 1px solid #ccc;
-  font-size: 14px;
+  padding: 8px 0;
 }
 
 /* Day cells */
-.calendar-grid .day-cell {
+.day-cell {
   border: 1px solid #ccc;
   min-height: 100px;
   padding: 5px;
   display: flex;
-  flex-direction: column;      /* stack date and content vertically */
-  justify-content: space-between; /* date top, content bottom */
+  flex-direction: column;
+  justify-content: space-between;
   background: #fafafa;
 }
 
-/* Date number at top-left */
-.calendar-grid .day-cell .date {
-  font-weight: bold;
-  font-size: 14px;
-  align-self: flex-start;
-}
+.day-cell .date { font-weight: bold; font-size: 14px; align-self: flex-start; }
+.day-cell .content { font-size: 13px; align-self: flex-start; margin-top: auto; word-break: break-word; }
 
-/* Content text at bottom-left */
-.calendar-grid .day-cell .content {
-  font-size: 13px;
-  align-self: flex-start;
-  margin-top: auto;            /* push content to bottom */
-  word-break: break-word;
-}
-
-/* === Responsive === */
 @media (max-width: 768px) {
   .calendar-container { width: 100%; padding: 10px; }
-  .calendar-grid .day-cell { min-height: 70px; font-size: 12px; }
+  .day-cell { min-height: 70px; font-size: 12px; }
   .calendar-header h2 { font-size: 16px; }
   .ribbon { display: none; }
   .side-panel { width: 30px; }
