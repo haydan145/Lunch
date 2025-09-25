@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Dynamic Calendar</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="side-panel left"></div>
@@ -13,15 +13,17 @@
   <main>
     <div class="calendar-container">
       <div class="calendar-nav">
-        <button id="prevMonth">←</button>
-        <span id="monthYear"></span>
-        <button id="nextMonth">→</button>
+        <button id="prevMonth" aria-label="Previous month">←</button>
+        <span id="monthYear" aria-live="polite"></span>
+        <button id="nextMonth" aria-label="Next month">→</button>
       </div>
-      <div class="days-of-week" id="daysOfWeek"></div>
-      <div id="calendarGrid" class="calendar-grid"></div>
+
+      <!-- calendar will be rendered inside this element -->
+      <div id="calendar" class="calendar-root"></div>
     </div>
   </main>
 
+  <!-- script placed at end so DOM typically exists, but script also guards with DOMContentLoaded -->
   <script src="calendar.js"></script>
 </body>
 </html>
