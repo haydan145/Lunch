@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: white;
+  display: flex;
+}
+
+.side-panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: -1;
+}
+
+.side-panel.left {
+  left: 0;
+  background: maroon;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.side-panel.right {
+  right: 0;
+  background: navy;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+main {
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 900px;
+  text-align: center;
+}
+
+h1 {
+  color: maroon;
+}
+
+.calendar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+  gap: 15px;
+}
+
+.calendar-nav button {
+  padding: 8px 16px;
+  background: navy;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.calendar-nav button:hover {
+  background: maroon;
+}
+
+#monthYear {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.calendar {
+  display: inline-block;
+  margin: 10px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 600px;
+}
+
+.calendar table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar th, .calendar td {
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 10px;
+  height: 60px;
+}
+
+.calendar th {
+  background: #f2f2f2;
+}
