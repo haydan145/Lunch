@@ -224,6 +224,37 @@
     });
 
     renderCalendar(currentDate);
-  </script>
+<body>
+  <!-- Panels -->
+  <div class="side-panel left-panel"></div>
+  <div class="side-panel right-panel"></div>
+  <!-- Ribbons -->
+  <div class="ribbon left-ribbon"></div>
+  <div class="ribbon right-ribbon"></div>
+
+  <!-- Menu Button -->
+  <button id="menuBtn" class="menu-btn">☰</button>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+    <h3>Menu</h3>
+    <div class="dropdown">
+      <button class="dropdown-btn">Edit ▼</button>
+      <div class="dropdown-content">
+        <p>Select a day in the calendar to edit it.</p>
+        <textarea id="dayContent" placeholder="Enter notes..."></textarea>
+        <button id="saveBtn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calendar -->
+  <div class="calendar-container">
+    <div class="calendar-header">
+      <button id="prev">&#8592;</button>
+      <h2 id="monthYear"></h2>
+      <button id="next">&#8594;</button>
+    </div>
+    <div class="calendar-grid" id="calendar"></div>
+  </div>
 </body>
-</html>
