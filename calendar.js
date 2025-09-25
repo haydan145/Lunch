@@ -1,62 +1,3 @@
-const monthNames = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-const daysOfWeek = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-
-let currentYear = 2025;
-let currentMonth = 8; // Sept 2025
-
-function renderCalendar(year, month) {
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-
-  // Update header
-  document.getElementById("monthYear").textContent = `${monthNames[month]} ${year}`;
-
-  // Days of week header
-  const daysHeader = document.getElementById("daysOfWeek");
-  daysHeader.innerHTML = daysOfWeek.map(d => `<div>${d}</div>`).join("");
-
-  // Grid cells
-  const grid = document.getElementById("calendarGrid");
-  grid.innerHTML = "";
-
-  // Empty cells before the first day
-  for (let i = 0; i < firstDay.getDay(); i++) {
-    grid.innerHTML += `<div class="calendar-cell"></div>`;
-  }
-
-  // Fill days
-  for (let d = 1; d <= lastDay.getDate(); d++) {
-    grid.innerHTML += `
-      <div class="calendar-cell">
-        <div class="date">${d}</div>
-        <div class="content"></div> <!-- placeholder for events -->
-      </div>
-    `;
-  }
-}
-
-document.getElementById("prevMonth").addEventListener("click", () => {
-  currentMonth--;
-  if (currentMonth < 0) {
-    currentMonth = 11;
-    currentYear--;
-  }
-  renderCalendar(currentYear, currentMonth);
-});
-
-document.getElementById("nextMonth").addEventListener("click", () => {
-  currentMonth++;
-  if (currentMonth > 11) {
-    currentMonth = 0;
-    currentYear++;
-  }
-  renderCalendar(currentYear, currentMonth);
-});
-
-window.onload = () => renderCalendar(currentYear, currentMonth);
 const monthYear = document.getElementById("monthYear");
 const calendar = document.getElementById("calendar");
 const prevBtn = document.getElementById("prevMonth");
@@ -81,5 +22,65 @@ function renderCalendar(date) {
   monthYear.textContent = `${monthNames[month]} ${year}`;
 
   // First day & number of days
-  const firstDay = n
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
 
+  // Create header (day names)
+  const headerRow = document.createElement("div");
+  headerRow.classList.add("day-names");
+  dayNames.forEach(d => {
+    const cell = document.createElement("div");
+    cell.classList.add("day-name");
+    cell.textContent = d;
+    headerRow.appendChild(cell);
+  });
+  calendar.appendChild(headerRow);
+
+  // Create grid for days
+  const grid = document.createElement("div");
+  grid.classList.add("days-grid");
+
+  // Blank slots before the first day
+  for (let i = 0; i < firstDay; i++) {
+    const blank = document.createElement("div");
+    blank.classList.add("day-cell", "empty");
+    grid.appendChild(blank);
+  }
+
+  // Add actual days
+  for (let d = 1; d <= daysInMonth; d++) {
+    const cell = document.createElement("div");
+    cell.classList.add("day-cell");
+    cell.textContent = d;
+    grid.appendChild(cell);
+  }
+
+  calendar.appendChild(grid);
+}
+
+// Navigation functions
+function goPrevMonth() {
+  currentDate.setMonth(currentDate.getMonth() - 1);
+  renderCalendar(currentDate);
+}
+
+function goNextMonth() {
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  renderCalendar(currentDate);
+}
+
+// Button listeners
+prevBtn.addEventListener("click", goPrevMonth);
+nextBtn.addEventListener("click", goNextMonth);
+
+// Arrow key listener
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft") {
+    goPrevMonth();
+  } else if (e.key === "ArrowRight") {
+    goNextMonth();
+  }
+});
+
+// Initial render
+renderCalendar(currentDate);
