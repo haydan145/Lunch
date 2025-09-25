@@ -1,22 +1,91 @@
+/* === Global Layout === */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.side-panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: -1;
+}
+
+.side-panel.left {
+  left: 0;
+  background: maroon;
+}
+
+.side-panel.right {
+  right: 0;
+  background: navy;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* === Calendar Container === */
 .calendar-container {
-  text-align: center;
   background: white;
   border: 2px solid #ccc;
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   padding: 20px;
-  border-radius: 12px;
-  width: 80%;
-  max-width: 1000px;
-  max-height: 85vh; /* ⬅️ prevents it from taking the whole screen */
-  overflow-y: auto;  /* scroll if content overflows */
+  border-radius: 8px;
+  width: 85%;
+  max-width: 1100px;
+  max-height: 85vh;
+  overflow-y: auto;
+  text-align: center;
 }
 
-/* Calendar grid styles */
+/* === Navigation Bar === */
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-nav button {
+  padding: 10px 20px;
+  background: navy;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.calendar-nav button:hover {
+  background: maroon;
+}
+
+#monthYear {
+  font-size: 28px;
+  font-weight: bold;
+  color: maroon;
+}
+
+/* === Day Names Header === */
 .day-names {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 .day-name {
@@ -27,6 +96,7 @@
   font-size: 14px;
 }
 
+/* === Day Grid === */
 .days-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -35,4 +105,74 @@
 
 .day-cell {
   border: 1px solid #ddd;
-  aspect-ratio: 1 / 1;   /* ⬅️ makes them squares instea*
+  aspect-ratio: 1 / 1; /* keep squares */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 4px;
+  font-size: 14px;
+  background: #fff;
+  box-sizing: border-box;
+  transition: background 0.2s ease;
+}
+
+.day-cell:hover {
+  background: #f9f9f9;
+}
+
+.day-cell.empty {
+  background: #fafafa;
+}
+
+/* === Inside Day Cells === */
+.day-cell .date {
+  font-weight: bold;
+  color: maroon;
+  margin-bottom: 4px;
+}
+
+.day-cell .content {
+  flex: 1;
+  font-size: 12px;
+  color: #333;
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 900px) {
+  .calendar-container {
+    width: 95%;
+    padding: 15px;
+  }
+  #monthYear {
+    font-size: 22px;
+  }
+  .day-name {
+    font-size: 12px;
+  }
+  .day-cell {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .side-panel {
+    width: 40px;
+  }
+  .calendar-container {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  .calendar-nav button {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+  #monthYear {
+    font-size: 18px;
+  }
+  .day-cell {
+    font-size: 10px;
+    padding: 2px;
+  }
+}
