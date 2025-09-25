@@ -5,31 +5,37 @@ const monthNames = [
 const daysOfWeek = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 
 let currentYear = 2025;
-let currentMonth = 8; // start at Sept 2025
+let currentMonth = 8; // Sept 2025
 
 function renderCalendar(year, month) {
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
 
-  let html = `<table><tr>${daysOfWeek.map(d => `<th>${d}</th>`).join("")}</tr><tr>`;
-
-  // Empty cells before 1st day
-  for (let i = 0; i < firstDay.getDay(); i++) {
-    html += "<td></td>";
-  }
-
-  // Dates
-  for (let d = 1; d <= lastDay.getDate(); d++) {
-    if ((firstDay.getDay() + d - 1) % 7 === 0 && d !== 1) {
-      html += "</tr><tr>";
-    }
-    html += `<td>${d}</td>`;
-  }
-
-  html += "</tr></table>";
-
-  document.getElementById("calendar").innerHTML = html;
+  // Update header
   document.getElementById("monthYear").textContent = `${monthNames[month]} ${year}`;
+
+  // Days of week header
+  const daysHeader = document.getElementById("daysOfWeek");
+  daysHeader.innerHTML = daysOfWeek.map(d => `<div>${d}</div>`).join("");
+
+  // Grid cells
+  const grid = document.getElementById("calendarGrid");
+  grid.innerHTML = "";
+
+  // Empty cells before the first day
+  for (let i = 0; i < firstDay.getDay(); i++) {
+    grid.innerHTML += `<div class="calendar-cell"></div>`;
+  }
+
+  // Fill days
+  for (let d = 1; d <= lastDay.getDate(); d++) {
+    grid.innerHTML += `
+      <div class="calendar-cell">
+        <div class="date">${d}</div>
+        <div class="content"></div> <!-- placeholder for events -->
+      </div>
+    `;
+  }
 }
 
 document.getElementById("prevMonth").addEventListener("click", () => {
