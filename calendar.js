@@ -1,4 +1,5 @@
-// calendar.js — robust keyboard + button navigation
+// calendar.js — robust keyboard + button navigation with data
+
 document.addEventListener("DOMContentLoaded", () => {
   const prevBtn = document.getElementById("prevMonth");
   const nextBtn = document.getElementById("nextMonth");
@@ -16,14 +17,52 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
   const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 
-  // start at Sept 2025
+  // start at September 2025
   let currentDate = new Date(2025, 8, 1);
+
+  // === Calendar Data ===
+  const calendarData = {
+    "2025-09": {
+      "1": "No School",
+      "2": "Meatballs and Marinara",
+      "3": "Shredded Chicken",
+      "4": "Pulled Pork",
+      "5": "Cheese Pizza",
+      "6": "",
+      "7": "",
+      "8": "Chicken Drumsticks",
+      "9": "Tacos",
+      "10": "Noodle Bar",
+      "11": "Beef Bolognese",
+      "12": "Hamburgers",
+      "13": "",
+      "14": "",
+      "15": "General Tso's Chicken",
+      "16": "Hot Dogs",
+      "17": "Mac and Cheese",
+      "18": "Apple Pork Chops",
+      "19": "Cheese Quesadillas",
+      "20": "",
+      "21": "",
+      "22": "Chicken Tenders",
+      "23": "Tacos",
+      "24": "Breakfast for Lunch",
+      "25": "Spicy Korean Chicken",
+      "26": "Pasta and French Fries",
+      "27": "",
+      "28": "",
+      "29": "Meatballs and Marinara",
+      "30": "Roasted Chicken"
+    }
+  };
 
   function renderCalendar(date) {
     calendarRoot.innerHTML = ""; // clear
 
     const year = date.getFullYear();
     const month = date.getMonth();
+    const monthKey = `${year}-${String(month + 1).padStart(2, "0")}`;
+
     monthYear.textContent = `${monthNames[month]} ${year}`;
 
     // header: day names
@@ -55,13 +94,19 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let d = 1; d <= daysInMonth; d++) {
       const cell = document.createElement("div");
       cell.className = "day-cell";
-      // structure: date + content placeholder
+
       const dateEl = document.createElement("div");
       dateEl.className = "date";
       dateEl.textContent = d;
+
       const content = document.createElement("div");
       content.className = "content";
-      // keep empty for now - future events can go in content
+
+      // populate content if exists in calendarData
+      if (calendarData[monthKey] && calendarData[monthKey][d]) {
+        content.textContent = calendarData[monthKey][d];
+      }
+
       cell.appendChild(dateEl);
       cell.appendChild(content);
       grid.appendChild(cell);
@@ -74,6 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currentDate.setMonth(currentDate.getMonth() - 1);
     renderCalendar(currentDate);
   }
+
   function goNextMonth() {
     currentDate.setMonth(currentDate.getMonth() + 1);
     renderCalendar(currentDate);
@@ -83,12 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
   prevBtn.addEventListener("click", goPrevMonth);
   nextBtn.addEventListener("click", goNextMonth);
 
-  // keyboard navigation — robust:
-  // - listens on document
-  // - ignores when focus is inside input/textarea/contenteditable
-  // - prevents default arrow behavior so it doesn't scroll the page
+  // keyboard navigation — robust
   document.addEventListener("keydown", (e) => {
-    // ignore if typing in inputs
     const active = document.activeElement;
     if (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA" || active.isContentEditable)) {
       return;
@@ -97,7 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "ArrowLeft") {
       e.preventDefault();
       goPrevMonth();
-      // helpful debug log if you open the console
       console.debug("Calendar: ArrowLeft pressed → previous month");
     } else if (e.key === "ArrowRight") {
       e.preventDefault();
