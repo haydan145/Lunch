@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 
-  let currentDate = new Date(2025, 8, 1);
+  let currentDate = new Date(2025, 8, 1); // September 2025
 
   const calendarData = {
     "2025-09": {
@@ -42,10 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
       calendarRoot.appendChild(header);
     });
 
-    // Blank cells for first weekday
+    // Blank cells before first day
     const firstWeekday = new Date(year, month, 1).getDay();
     for (let i = 0; i < firstWeekday; i++) calendarRoot.appendChild(document.createElement("div"));
 
+    // Day cells
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     for (let d = 1; d <= daysInMonth; d++) {
       const cell = document.createElement("div");
