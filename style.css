@@ -1,3 +1,4 @@
+/* === Base Layout === */
 body {
   margin: 0;
   padding: 0;
@@ -11,14 +12,29 @@ body {
   overflow-x: hidden;
 }
 
-.side-panel { position: fixed; top: 0; bottom: 0; width: 60px; z-index: 0; }
+/* === Side Panels === */
+.side-panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 0;
+}
 .left-panel { left: 0; background: maroon; }
 .right-panel { right: 0; background: navy; }
 
-.ribbon { position: fixed; top: 0; bottom: 0; width: 10px; z-index: 1; }
+/* === Ribbons === */
+.ribbon {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  z-index: 1;
+}
 .left-ribbon { left: 65px; background: maroon; }
 .right-ribbon { right: 65px; background: navy; }
 
+/* === Calendar Container === */
 .calendar-container {
   margin-top: 30px;
   background: #fff;
@@ -29,6 +45,7 @@ body {
   position: relative;
 }
 
+/* === Header === */
 .calendar-header {
   display: flex;
   justify-content: center;
@@ -47,7 +64,8 @@ body {
 .calendar-header button:hover { background: darkred; }
 .calendar-header h2 { margin: 0; font-size: 20px; color: #333; }
 
-#calendar {
+/* === Calendar Grid === */
+.calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
@@ -73,9 +91,20 @@ body {
   background: #fafafa;
 }
 
-.day-cell .date { font-weight: bold; font-size: 14px; align-self: flex-start; }
-.day-cell .content { font-size: 13px; align-self: flex-start; margin-top: auto; word-break: break-word; }
+.day-cell .date {
+  font-weight: bold;
+  font-size: 14px;
+  align-self: flex-start;
+}
 
+.day-cell .content {
+  font-size: 13px;
+  align-self: flex-start;
+  margin-top: auto;
+  word-break: break-word;
+}
+
+/* === Responsive === */
 @media (max-width: 768px) {
   .calendar-container { width: 100%; padding: 10px; }
   .day-cell { min-height: 70px; font-size: 12px; }
