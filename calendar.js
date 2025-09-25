@@ -57,3 +57,29 @@ document.getElementById("nextMonth").addEventListener("click", () => {
 });
 
 window.onload = () => renderCalendar(currentYear, currentMonth);
+const monthYear = document.getElementById("monthYear");
+const calendar = document.getElementById("calendar");
+const prevBtn = document.getElementById("prevMonth");
+const nextBtn = document.getElementById("nextMonth");
+
+let currentDate = new Date(2025, 8); // Start at September 2025
+
+// Month and day names
+const monthNames = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+function renderCalendar(date) {
+  calendar.innerHTML = ""; // Clear previous
+
+  const year = date.getFullYear();
+  const month = date.getMonth();
+
+  // Month & Year title
+  monthYear.textContent = `${monthNames[month]} ${year}`;
+
+  // First day & number of days
+  const firstDay = n
+
