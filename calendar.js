@@ -1,5 +1,3 @@
-// calendar.js — robust keyboard + button navigation with data
-
 document.addEventListener("DOMContentLoaded", () => {
   const prevBtn = document.getElementById("prevMonth");
   const nextBtn = document.getElementById("nextMonth");
@@ -11,16 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const monthNames = [
-    "January","February","March","April","May","June",
-    "July","August","September","October","November","December"
-  ];
+  const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 
-  // start at September 2025
-  let currentDate = new Date(2025, 8, 1);
+  let currentDate = new Date(2025, 8, 1); // start Sept 2025
 
-  // === Calendar Data ===
   const calendarData = {
     "2025-09": {
       "1": "No School",
@@ -57,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function renderCalendar(date) {
-    calendarRoot.innerHTML = ""; // clear
+    calendarRoot.innerHTML = "";
 
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -65,32 +58,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     monthYear.textContent = `${monthNames[month]} ${year}`;
 
-    // header: day names
-    const header = document.createElement("div");
-    header.className = "day-names";
+    // Day headers
     dayNames.forEach(d => {
       const el = document.createElement("div");
       el.className = "day-name";
       el.textContent = d;
-      header.appendChild(el);
+      calendarRoot.appendChild(el);
     });
-    calendarRoot.appendChild(header);
 
-    // grid container
-    const grid = document.createElement("div");
-    grid.className = "days-grid";
-
+    // Blank cells for first weekday
     const firstWeekday = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    // blank cells before the 1st
     for (let i = 0; i < firstWeekday; i++) {
       const blank = document.createElement("div");
-      blank.className = "day-cell empty";
-      grid.appendChild(blank);
+      calendarRoot.appendChild(blank);
     }
 
-    // day cells
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
     for (let d = 1; d <= daysInMonth; d++) {
       const cell = document.createElement("div");
       cell.className = "day-cell";
@@ -101,52 +84,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const content = document.createElement("div");
       content.className = "content";
-
-      // populate content if exists in calendarData
       if (calendarData[monthKey] && calendarData[monthKey][d]) {
         content.textContent = calendarData[monthKey][d];
       }
 
       cell.appendChild(dateEl);
       cell.appendChild(content);
-      grid.appendChild(cell);
+      calendarRoot.appendChild(cell);
     }
-
-    calendarRoot.appendChild(grid);
   }
 
-  function goPrevMonth() {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    renderCalendar(currentDate);
-  }
+  function goPrevMonth() { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(currentDate); }
+  function goNextMonth() { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(currentDate); }
 
-  function goNextMonth() {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar(currentDate);
-  }
-
-  // button clicks
   prevBtn.addEventListener("click", goPrevMonth);
   nextBtn.addEventListener("click", goNextMonth);
 
-  // keyboard navigation — robust
   document.addEventListener("keydown", (e) => {
     const active = document.activeElement;
-    if (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA" || active.isContentEditable)) {
-      return;
-    }
-
-    if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      goPrevMonth();
-      console.debug("Calendar: ArrowLeft pressed → previous month");
-    } else if (e.key === "ArrowRight") {
-      e.preventDefault();
-      goNextMonth();
-      console.debug("Calendar: ArrowRight pressed → next month");
-    }
+    if (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA" || active.isContentEditable)) return;
+    if (e.key === "ArrowLeft") { e.preventDefault(); goPrevMonth(); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); goNextMonth(); }
   });
 
-  // initial render
   renderCalendar(currentDate);
 });
