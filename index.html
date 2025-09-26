@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calendar with Panels</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Lunch Calendar</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Panels -->
-  <div class="side-panel left-panel"></div>
-  <div class="side-panel right-panel"></div>
-  <!-- Ribbons -->
-  <div class="ribbon left-ribbon"></div>
-  <div class="ribbon right-ribbon"></div>
+  <!-- Sidebars -->
+  <div class="left-ribbon"></div>
+  <div class="right-ribbon"></div>
 
-  <!-- Calendar -->
+  <!-- Calendar container -->
   <div class="calendar-container">
-    <div class="calendar-header">
-      <button id="prevMonth">&#8592;</button>
-      <h2 id="monthYear"></h2>
-      <button id="nextMonth">&#8594;</button>
-    </div>
-    <div class="calendar-grid" id="calendar"></div>
+    <header>
+      <button id="prev">&#8592;</button>
+      <h1 id="monthYear">September 2025</h1>
+      <button id="next">&#8594;</button>
+    </header>
+    <div id="calendar"></div>
   </div>
 
   <!-- Footer -->
@@ -33,6 +30,6 @@
        class="report-link">here</a>.
   </footer>
 
-  <script src="calendar.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
