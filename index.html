@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DXSF Lunch Calendar</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <title>Calendar with Panels</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Panels -->
   <div class="side-panel left-panel"></div>
   <div class="side-panel right-panel"></div>
-
   <!-- Ribbons -->
   <div class="ribbon left-ribbon"></div>
   <div class="ribbon right-ribbon"></div>
@@ -23,10 +21,14 @@
       <h2 id="monthYear"></h2>
       <button id="nextMonth">&#8594;</button>
     </div>
-
-    <!-- Calendar container: must have both ID and class -->
-    <div id="calendar" class="calendar-grid"></div>
+    <div class="calendar-grid" id="calendar"></div>
   </div>
+
+  <!-- Footer -->
+  <footer class="calendar-footer">
+    This information may not be correct. Feel free to report any issues 
+    <a href="#" class="report-link">here</a>.
+  </footer>
 
   <script src="calendar.js"></script>
 </body>
